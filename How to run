@@ -1,0 +1,21 @@
+Hello marker,
+
+Ensure that server.crt and server.key are in the directory. Otherwise they can be created by running this command in terminal in the directory
+
+openssl req -x509 -newkey rsa:2048 \
+  -keyout server.key -out server.crt \
+  -days 365 -nodes \
+  -subj "/CN=localhost"
+
+These are the instruction to run my program on Turing
+
+1. Open 2 x terminal windows and use cd to bring both of them to this directory
+2. ensure that both startCLient.sh and startServer.sh have execution privalige 
+3. run ./startServer.sh 
+4. You will be asked what port number you would like to host on. In testing i use 2000 due to restrictions in lower ports on linux and not having permissions. If you put a port that it cant host on it will notify
+you however you are free to chose whichever port you feel.
+5. Once server connects it will display a "Hosting on port (x)"
+6. Run ./startCLient.sh and when asked what port you would like to connect to, input the same port you are hosting the server on
+7. the client script will then send local host and port number to start Client and a connection will be made if the port numbers are a match and a START GAME message will be sent to the server.
+8. Server will begin the game and send a board to the client, client then sends co ordinates to the server and the two scripts go back and forward until all ships have been sunk or a disconnect
+9. When all ships are sunk a congratulations message will be sent to the client with the amount of shots taken and the server will drop the connection. Re launch ./startCLient and input the same port number to play again
